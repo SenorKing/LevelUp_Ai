@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', { title: 'Workout' }) %>
+</head>
+<body>
+
+    <%- include('partials/nav', { user, active: 'workout' }) %>
+
+    <main class="dashboard">
+
+        <section class="welcome">
+            <h1><i class="fa-solid fa-dumbbell"></i> Workout Tracker</h1>
+            <p>Track your progress and level up every workout.</p>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-robot"></i> AI Workout Plan</h2>
+            <hr>
+            <p style="color:#94A3B8; margin-bottom:15px;">Let Gemini build you a plan based on your goal and schedule.</p>
+            <form id="planForm">
+                <p>
+                    <label>Goal</label>
+                    <select name="goal">
+                        <option value="build muscle">Build Muscle</option>
+                        <option value="lose fat">Lose Fat</option>
+                        <option value="general fitness">General Fitness</option>
+                        <option value="endurance">Endurance</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Days Per Week</label>
+                    <input type="number" name="daysPerWeek" min="1" max="7" value="3">
+                </p>
+                <p>
+                    <label>Focus Areas (optional)</label>
+                    <input type="text" name="focus" placeholder="e.g. upper body, legs, core">
+                </p>
+                <p>
+                    <label>Experience Level</label>
+                    <select name="experience">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </p>
+                <div id="planFormError" class="form-error"></div>
+                <button type="submit">Generate Plan</button>
+            </form>
+            <div id="workoutPlanOutput" class="ai-plan-output" style="display:none;"></div>
+        </section>
+
+        <section class="stats">
+            <div class="card">
+                <h3>Current Weight</h3>
+                <h2><%= latest.weight || '—' %> lbs</h2>
+            </div>
+            <div class="card">
+                <h3>Steps Today</h3>
+                <h2><%= latest.steps || 0 %></h2>
+            </div>
+            <div class="card">
+                <h3>Workouts Logged</h3>
+                <h2><%= workoutCount %></h2>
+            </div>
+            <div class="card">
+                <h3>Current Streak</h3>
+                <h2><%= streak %> Days</h2>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-plus"></i> Log Today's Stats</h2>
+            <hr>
+            <form id="workoutForm">
+                <p>
+                    <label>Weight (lbs)</label>
+                    <input type="number" name="weight" step="0.1" min="0">
+                </p>
+                <p>
+                    <label>Steps</label>
+                    <input type="number" name="steps" step="1" min="0">
+                </p>
+                <p>
+                    <label>Pushups</label>
+                    <input type="number" name="pushups" step="1" min="0">
+                </p>
+                <p>
+                    <label>Sit-ups</label>
+                    <input type="number" name="situps" step="1" min="0">
+                </p>
+                <p>
+                    <label>Squats</label>
+                    <input type="number" name="squats" step="1" min="0">
+                </p>
+                <div id="workoutFormError" class="form-error"></div>
+                <button type="submit">Save Today's Log</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-person-hiking"></i> Log an Activity</h2>
+            <hr>
+            <p style="color:#94A3B8; margin-bottom:15px;">Hiking, swimming, sports, and more all earn XP toward your next level.</p>
+            <form id="activityForm">
+                <p>
+                    <label>Activity Type</label>
+                    <select name="type" required>
+                        <% activityTypes.forEach(t => { %>
+                            <option value="<%= t %>"><%= t.charAt(0).toUpperCase() + t.slice(1) %></option>
+                        <% }) %>
+                    </select>
+                </p>
+                <p>
+                    <label>Duration (minutes)</label>
+                    <input type="number" name="durationMinutes" step="1" min="1" required>
+                </p>
+                <p>
+                    <label>Note (optional)</label>
+                    <input type="text" name="note" placeholder="e.g. Trail run at the lake">
+                </p>
+                <div id="activityFormError" class="form-error"></div>
+                <button type="submit">Log Activity</button>
+            </form>
+        </section>
+
+        <section class="activity">
+            <h2>Recent Activities</h2>
+            <ul id="activityHistoryList">
+                <% if (activityHistory && activityHistory.length) { %>
+                    <% activityHistory.forEach(a => { %>
+                        <li>✔ <%= a.type.charAt(0).toUpperCase() + a.type.slice(1) %> — <%= a.durationMinutes %> min (+<%= a.xpEarned %> XP) on <%= a.loggedOn.toLocaleDateString() %></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No activities logged yet.</li>
+                <% } %>
+            </ul>
+        </section>
+
+        <section class="activity">
+            <h2>Recent Workouts</h2>
+            <ul id="workoutHistoryList">
+                <% if (history && history.length) { %>
+                    <% history.forEach(h => { %>
+                        <li>✔ Logged <%= h.loggedOn.toLocaleDateString() %> — <%= h.weight || '—' %> lbs, <%= h.steps || 0 %> steps</li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No workouts logged yet.</li>
+                <% } %>
+            </ul>
+        </section>
+
+    </main>
+
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/workout-script.js"></script>
+</body>
+</html>

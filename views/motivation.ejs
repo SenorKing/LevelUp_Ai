@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', { title: 'Motivation' }) %>
+</head>
+<body>
+
+    <%- include('partials/nav', { user, active: 'motivation' }) %>
+
+    <main class="dashboard">
+
+        <section class="welcome">
+            <h1>Daily Motivation</h1>
+            <p>Keep leveling up one day at a time.</p>
+        </section>
+
+        <section class="stats">
+            <div class="card">
+                <h3>Current Streak</h3>
+                <h2><%= streak %> Days 🔥</h2>
+            </div>
+            <div class="card">
+                <h3>Current Level</h3>
+                <h2>Level <%= levelInfo.level %></h2>
+            </div>
+            <div class="card">
+                <h3>XP</h3>
+                <h2><%= levelInfo.totalXp %> XP</h2>
+            </div>
+            <div class="card">
+                <h3>Today's Goal</h3>
+                <h2><%= goal %></h2>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-robot"></i> AI Coach</h2>
+            <hr>
+            <div class="ai-message">
+                <p><%= aiMessage %></p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-quote-left"></i> Quote of the Day</h2>
+            <hr>
+            <blockquote>"<%= quote %>"</blockquote>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-list-check"></i> Today's Mission</h2>
+            <hr>
+            <ul class="mission-list">
+                <% missions.forEach(m => { %>
+                    <li><%= m.done ? '✔' : '⬜' %> <%= m.label %></li>
+                <% }) %>
+            </ul>
+        </section>
+
+        <section class="panel">
+            <h2><i class="fa-solid fa-video"></i> Motivational Videos</h2>
+            <hr>
+            <div class="video-grid" id="videoGrid">
+                <% videos.forEach(v => { %>
+                    <iframe src="https://www.youtube.com/embed/<%= v.youtubeId %>" allowfullscreen></iframe>
+                <% }) %>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/javascripts/app.js"></script>
+</body>
+</html>

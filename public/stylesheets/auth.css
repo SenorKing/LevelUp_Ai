@@ -1,0 +1,179 @@
+/* LOGIN / REGISTER */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body.auth-body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(rgb(50, 14, 14), rgb(51, 40, 14)),
+        url("/images/gate-bg.svg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    color:#F8FAFC;
+}
+
+/* HEADER */
+
+header.auth-header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 50px;
+
+    background:#1A1F2B;
+    border-bottom:3px solid #8D0B24;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.35);
+
+    z-index:1000;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#D4AF37;
+    letter-spacing:2px;
+}
+
+/* LOGIN / REGISTER CARD (renamed from .container to avoid clashing
+   with the app-wide layout .container in style.css) */
+
+.auth-card{
+    width:400px;
+    background:#1F2937;
+    padding:30px;
+    border-radius:18px;
+    border-top:5px solid #8D0B24;
+    box-shadow: 0 15px 35px rgba(0,0,0,.45);
+    transition:.35s;
+}
+
+.auth-card:hover{
+    border-top:5px solid #D4AF37;
+    box-shadow: 0 0 20px rgba(141,11,36,.35);
+}
+
+/* TITLES */
+
+.auth-card h1{
+    text-align:center;
+    color:#D4AF37;
+    margin-bottom:10px;
+    font-size:34px;
+}
+
+.auth-card h4{
+    text-align:center;
+    color:#CBD5E1;
+    margin-bottom:30px;
+    font-weight:normal;
+}
+
+/* FORM */
+
+.auth-card label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    color:#F8FAFC;
+    font-weight:bold;
+}
+
+.auth-card input{
+    width:100%;
+    padding:14px;
+    border-radius:8px;
+    border:2px solid #374151;
+    background:#111827;
+    color:white;
+    font-size:15px;
+    transition:.3s;
+}
+
+.auth-card input::placeholder{
+    color:#94A3B8;
+}
+
+.auth-card input:focus{
+    outline:none;
+    border-color:#D4AF37;
+    box-shadow:0 0 12px rgba(212,175,55,.3);
+}
+
+.auth-card button{
+    width:100%;
+    margin-top:30px;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#6D071A;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.auth-card button:hover{
+    background:#8D0B24;
+    transform:translateY(-2px);
+    box-shadow:0 0 15px rgba(141,11,36,.45);
+}
+
+.auth-card p{
+    margin-top:25px;
+    text-align:center;
+    color:#CBD5E1;
+}
+
+.auth-card a{
+    color:#D4AF37;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.auth-card a:hover{
+    color:#8D0B24;
+}
+
+.auth-card hr{
+    border:none;
+    height:1px;
+    background:#374151;
+    margin:25px 0;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+    header.auth-header{
+        padding:0 20px;
+    }
+    .logo{
+        font-size:22px;
+    }
+    .auth-card{
+        width:90%;
+        padding:30px;
+    }
+}

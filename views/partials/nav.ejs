@@ -1,0 +1,28 @@
+<header class="navbar">
+    <a href="/dashboard" class="logo"><h2>LevelUp AI</h2></a>
+    <div class="profile">
+        <a href="/profile"><i class="fa-solid fa-user"></i> <span>Welcome back, <em><%= user.username %></em></span></a>
+    </div>
+</header>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <ul>
+            <li class="<%= active === 'dashboard' ? 'active' : '' %>">
+                <i class="fa-solid fa-house"></i><a href="/dashboard">Dashboard</a>
+            </li>
+            <li class="<%= active === 'workout' ? 'active' : '' %>">
+                <i class="fa-solid fa-dumbbell"></i><a href="/workout">Workout</a>
+            </li>
+            <li class="<%= active === 'motivation' ? 'active' : '' %>">
+                <i class="fa-solid fa-fire"></i><a href="/motivation">Motivation</a>
+            </li>
+            <li class="<%= active === 'profile' ? 'active' : '' %>">
+                <i class="fa-solid fa-user"></i><a href="/profile">Profile</a>
+            </li>
+            <li>
+                <i class="fa-solid fa-right-from-bracket"></i> <a href="#" id="logoutLink">Logout</a>
+            </li>
+        </ul>
+    </aside>

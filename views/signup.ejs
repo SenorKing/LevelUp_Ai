@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | LevelUp AI</title>
+    <link rel="stylesheet" href="/stylesheets/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <header class="auth-header">
+        <div class="logo">LevelUp AI</div>
+    </header>
+
+    <div class="auth-card">
+        <h1>Create Account</h1>
+        <h4>Start your leveling-up journey.</h4>
+
+        <form id="signupForm">
+            <label>Username</label>
+            <input type="text" name="username" required minlength="3">
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required minlength="6">
+
+            <div id="signupError" class="form-error"></div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <hr>
+        <p>Already have an account? <a href="/login">Log in</a></p>
+    </div>
+
+    <script src="/javascripts/auth-script.js"></script>
+</body>
+</html>

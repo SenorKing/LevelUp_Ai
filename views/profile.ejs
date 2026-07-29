@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', { title: 'Profile' }) %>
+</head>
+<body>
+
+    <%- include('partials/nav', { user, active: 'profile' }) %>
+
+    <main class="dashboard">
+
+        <section class="welcome">
+            <h1>Your Profile</h1>
+            <p>Account details and lifetime stats.</p>
+        </section>
+
+        <section class="stats">
+            <div class="card">
+                <h3>Member Since</h3>
+                <h2><%= memberSince %></h2>
+            </div>
+            <div class="card">
+                <h3>Workouts Logged</h3>
+                <h2><%= stats.workoutCount %></h2>
+            </div>
+            <div class="card">
+                <h3>Level</h3>
+                <h2><%= levelInfo.level %></h2>
+            </div>
+            <div class="card">
+                <h3>Rank</h3>
+                <h2><%= levelInfo.rank %></h2>
+            </div>
+        </section>
+
+        <section class="panel xp-panel">
+            <h2><i class="fa-solid fa-ranking-star"></i> Leveling Progress</h2>
+            <hr>
+            <div class="xp-meta">
+                <span><%= levelInfo.xpIntoLevel %> / 100 XP to Level <%= levelInfo.level + 1 %></span>
+                <span><%= levelInfo.totalXp %> Total XP</span>
+            </div>
+            <div class="xp-track"><div class="xp-fill" style="width: <%= levelInfo.xpPercent %>%;"></div></div>
+            <p class="xp-rank-note">
+                <% if (levelInfo.isMaxRank) { %>
+                    You've reached the highest rank: S.
+                <% } else { %>
+                    <%= levelInfo.levelsToNextRank %> level<%= levelInfo.levelsToNextRank === 1 ? '' : 's' %> to Rank <%= levelInfo.nextRank %>
+                <% } %>
+            </p>
+        </section>
+
+        <section class="dashboard-grid">
+
+            <div class="panel">
+                <h2><i class="fa-solid fa-id-card"></i> Account Info</h2>
+                <hr>
+                <form id="profileForm">
+                    <p>
+                        <label>Username</label>
+                        <input type="text" name="username" value="<%= user.username %>" required>
+                    </p>
+                    <p>
+                        <label>Email</label>
+                        <input type="email" name="email" value="<%= user.email %>" required>
+                    </p>
+                    <div id="profileFormError" class="form-error"></div>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h2><i class="fa-solid fa-lock"></i> Change Password</h2>
+                <hr>
+                <form id="passwordForm">
+                    <p>
+                        <label>Current Password</label>
+                        <input type="password" name="currentPassword" required>
+                    </p>
+                    <p>
+                        <label>New Password</label>
+                        <input type="password" name="newPassword" minlength="6" required>
+                    </p>
+                    <div id="passwordFormError" class="form-error"></div>
+                    <div id="passwordFormSuccess" class="form-success"></div>
+                    <button type="submit">Update Password</button>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/profile-script.js"></script>
+</body>
+</html>

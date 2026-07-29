@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', { title: 'Dashboard' }) %>
+</head>
+<body>
+
+    <%- include('partials/nav', { user, active: 'dashboard' }) %>
+
+    <main class="dashboard">
+
+        <section class="welcome">
+            <h1>Welcome Back, <%= user.username %> <span class="level-badge">Lv. <%= levelInfo.level %> · Rank <%= levelInfo.rank %></span> 💪 </h1>
+            <p>Keep leveling up every day.</p>
+        </section>
+
+        <section class="panel xp-panel">
+            <h2><i class="fa-solid fa-ranking-star"></i> Leveling Progress</h2>
+            <hr>
+            <div class="xp-meta">
+                <span><%= levelInfo.xpIntoLevel %> / 100 XP to Level <%= levelInfo.level + 1 %></span>
+                <span><%= levelInfo.totalXp %> Total XP</span>
+            </div>
+            <div class="xp-track"><div class="xp-fill" style="width: <%= levelInfo.xpPercent %>%;"></div></div>
+            <p class="xp-rank-note">
+                <% if (levelInfo.isMaxRank) { %>
+                    You've reached the highest rank: S.
+                <% } else { %>
+                    <%= levelInfo.levelsToNextRank %> level<%= levelInfo.levelsToNextRank === 1 ? '' : 's' %> to Rank <%= levelInfo.nextRank %>
+                <% } %>
+            </p>
+        </section>
+
+        <section class="stats">
+            <div class="card">
+                <h3>Weight</h3>
+                <h2><%= latest.weight || '—' %> lbs</h2>
+            </div>
+            <div class="card">
+                <h3>Steps</h3>
+                <h2><%= latest.steps || 0 %></h2>
+            </div>
+            <div class="card">
+                <h3>Pushups</h3>
+                <h2><%= latest.pushups || 0 %></h2>
+            </div>
+            <div class="card">
+                <h3>Sit-ups</h3>
+                <h2><%= latest.situps || 0 %></h2>
+            </div>
+            <div class="card">
+                <h3>Squats</h3>
+                <h2><%= latest.squats || 0 %></h2>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+
+            <div class="panel">
+                <h2><i class="fa-solid fa-dumbbell"></i> Today's Workout</h2>
+                <hr>
+                <p><%= todaysWorkout || 'No workout logged yet today.' %></p>
+                <button onclick="window.location.href='/workout'">Continue Workout</button>
+            </div>
+
+            <div class="panel">
+                <h2><i class="fa-solid fa-fire"></i> Motivation</h2>
+                <hr>
+                <p>"<%= quote %>"</p>
+                <button onclick="window.location.href='/motivation'">Watch Videos</button>
+            </div>
+
+            <div class="panel">
+                <h2><i class="fa-solid fa-robot"></i> AI Coach</h2>
+                <hr>
+                <p id="aiCoachOutput">
+                    "Stay consistent today. Small progress every day leads to huge improvements."
+                </p>
+                <button id="askGeminiBtn">Ask Gemini</button>
+            </div>
+
+        </section>
+
+        <section class="activity">
+            <h2>Recent Activity</h2>
+            <ul id="recentActivityList">
+                <% if (recentActivity && recentActivity.length) { %>
+                    <% recentActivity.forEach(item => { %>
+                        <li>✔ <%= item %></li>
+                    <% }) %>
+                <% } else { %>
+                    <li>No activity logged yet.</li>
+                <% } %>
+            </ul>
+        </section>
+
+    </main>
+
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/dash-script.js"></script>
+</body>
+</html>
