@@ -72,10 +72,10 @@ flowchart TD
 
     UserModel --> Atlas
     WorkoutModel --> Atlas
-```
 
     Dashboard -- "click Ask Gemini" --> GeminiRoute
     GeminiRoute -- "recent stats" --> WorkoutModel
     GeminiRoute -- "generateContent" --> GeminiAPI
     GeminiAPI -- "AI reply" --> GeminiRoute
     GeminiRoute -- "JSON reply" --> Dashboard
+```
