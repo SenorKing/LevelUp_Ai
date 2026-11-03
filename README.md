@@ -7,8 +7,8 @@ https://levelup-ai-0hbx.onrender.com
 
 ################
 Testing Info:
-email: andreking123@gmail.com
-password: 123456789
+test-email: andreking123@gmail.com
+test-password: 123456789
 ################
 
 ################
