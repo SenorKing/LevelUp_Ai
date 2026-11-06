@@ -17,7 +17,7 @@ API: Google API
 
 ###############
 DATABASE: mangoDB
-SCHEMA: LevulUp
+SCHEMA: LevelUp
 ###############
 
 ###############
