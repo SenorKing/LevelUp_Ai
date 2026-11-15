@@ -34,23 +34,24 @@
         <section class="stats">
             <div class="card">
                 <h3>Weight</h3>
-                <h2><%= latest.weight || '—' %> lbs</h2>
+                <h2><%= stats.weight !== null ? stats.weight : '—' %> lbs</h2>
+                <% if (stats.weightNote) { %><p class="card-note"><%= stats.weightNote %></p><% } %>
             </div>
             <div class="card">
-                <h3>Steps</h3>
-                <h2><%= latest.steps || 0 %></h2>
+                <h3>Steps Today</h3>
+                <h2><%= stats.steps %></h2>
             </div>
             <div class="card">
-                <h3>Pushups</h3>
-                <h2><%= latest.pushups || 0 %></h2>
+                <h3>Pushups Today</h3>
+                <h2><%= stats.pushups %></h2>
             </div>
             <div class="card">
-                <h3>Sit-ups</h3>
-                <h2><%= latest.situps || 0 %></h2>
+                <h3>Sit-ups Today</h3>
+                <h2><%= stats.situps %></h2>
             </div>
             <div class="card">
-                <h3>Squats</h3>
-                <h2><%= latest.squats || 0 %></h2>
+                <h3>Squats Today</h3>
+                <h2><%= stats.squats %></h2>
             </div>
         </section>
 

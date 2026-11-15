@@ -53,11 +53,12 @@
         <section class="stats">
             <div class="card">
                 <h3>Current Weight</h3>
-                <h2><%= latest.weight || '—' %> lbs</h2>
+                <h2><%= stats.weight !== null ? stats.weight : '—' %> lbs</h2>
+                <% if (stats.weightNote) { %><p class="card-note"><%= stats.weightNote %></p><% } %>
             </div>
             <div class="card">
                 <h3>Steps Today</h3>
-                <h2><%= latest.steps || 0 %></h2>
+                <h2><%= stats.steps %></h2>
             </div>
             <div class="card">
                 <h3>Workouts Logged</h3>
