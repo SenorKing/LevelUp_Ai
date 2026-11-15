@@ -4,6 +4,7 @@ const ActivityLog = require('../models/ActivityLog');
 const User = require('../models/User');
 const { requireAuthPage } = require('../middleware/auth');
 const { getTotalXp } = require('../services/xp');
+const { getDailyStats } = require('../services/stats');
 const { getLevelInfo } = require('../utils/leveling');
 
 const router = express.Router();
@@ -33,7 +34,7 @@ router.get('/signup', attachUser, (req, res) => {
 });
 
 router.get('/dashboard', requireAuthPage, async (req, res) => {
-  const latest = (await WorkoutLog.findOne({ user: req.user.id }).sort({ loggedOn: -1 })) || {};
+  const stats = await getDailyStats(req.user.id, req.cookies.tz);
   const totalXp = await getTotalXp(req.user.id);
   const levelInfo = getLevelInfo(totalXp);
 
@@ -61,7 +62,7 @@ router.get('/dashboard', requireAuthPage, async (req, res) => {
 
   res.render('dashboard', {
     user: req.user,
-    latest,
+    stats,
     levelInfo,
     todaysWorkout: null,
     quote: 'We must all suffer one of two things: the pain of discipline or the pain of regret. — Jim Rohn',
@@ -70,14 +71,14 @@ router.get('/dashboard', requireAuthPage, async (req, res) => {
 });
 
 router.get('/workout', requireAuthPage, async (req, res) => {
-  const latest = (await WorkoutLog.findOne({ user: req.user.id }).sort({ loggedOn: -1 })) || {};
+  const stats = await getDailyStats(req.user.id, req.cookies.tz);
   const history = await WorkoutLog.find({ user: req.user.id }).sort({ loggedOn: -1 }).limit(5);
   const workoutCount = await WorkoutLog.countDocuments({ user: req.user.id });
   const activityHistory = await ActivityLog.find({ user: req.user.id }).sort({ loggedOn: -1 }).limit(5);
 
   res.render('workout', {
     user: req.user,
-    latest,
+    stats,
     history,
     workoutCount,
     activityHistory,

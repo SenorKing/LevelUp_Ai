@@ -196,6 +196,12 @@ a{
     font-size:32px;
 }
 
+.card-note{
+    color:#94A3B8;
+    font-size:13px;
+    margin-top:8px;
+}
+
 /* ==========================
    PANELS / GRID
 ========================== */
